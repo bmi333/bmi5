@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ExtinCol | Venta y Recarga de Extintores en Colombia</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+:root{
+    --rojo:#e30613;
+    --rojo-oscuro:#9f0008;
+    --negro:#151515;
+    --gris:#f5f5f5;
+    --amarillo:#ffc107;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#fff;
+    color:#222;
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+.navbar{
+    background:rgba(15,15,15,.95);
+    backdrop-filter:blur(8px);
+    padding:15px 0;
+}
+
+.navbar-brand{
+    color:white!important;
+    font-weight:900;
+    font-size:28px;
+    letter-spacing:.5px;
+}
+
+.navbar-brand span{
+    color:var(--rojo);
+}
+
+.nav-link{
+    color:white!important;
+    font-weight:500;
+    margin:0 8px;
+}
+
+.nav-link:hover{
+    color:var(--amarillo)!important;
+}
+
+/* HERO */
+.hero{
+    min-height:100vh;
+    background:
+    linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
+    url('https://images.unsplash.com/photo-1581093458791-9f3c3900df7b?auto=format&fit=crop&w=1600&q=80');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    color:white;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:280px;
+    height:280px;
+    background:var(--rojo);
+    border-radius:50%;
+    filter:blur(110px);
+    top:20%;
+    right:8%;
+    animation:pulse 4s infinite alternate;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.hero h1{
+    font-size:clamp(42px,6vw,76px);
+    font-weight:900;
+    line-height:1;
+}
+
+.hero h1 span{
+    color:var(--rojo);
+}
+
+.hero p{
+    font-size:clamp(17px,2vw,22px);
+    max-width:720px;
+    margin-top:20px;
+    opacity:.95;
+}
+
+.badge-custom{
+    background:rgba(227,6,19,.18);
+    border:1px solid var(--rojo);
+    color:white;
+    padding:10px 18px;
+    border-radius:50px;
+    display:inline-block;
+    margin-bottom:20px;
+    font-weight:600;
+}
+
+.btn-main{
+    background:var(--rojo);
+    color:white;
+    padding:16px 34px;
+    border-radius:50px;
+    font-weight:800;
+    text-decoration:none;
+    display:inline-flex;
+    gap:10px;
+    align-items:center;
+    transition:.3s;
+    box-shadow:0 15px 35px rgba(227,6,19,.35);
+}
+
+.btn-main:hover{
+    transform:translateY(-5px) scale(1.03);
+    background:var(--rojo-oscuro);
+    color:white;
+}
+
+.btn-secondary-custom{
+    border:2px solid white;
+    color:white;
+    padding:14px 30px;
+    border-radius:50px;
+    text-decoration:none;
+    font-weight:700;
+    margin-left:12px;
+    transition:.3s;
+}
+
+.btn-secondary-custom:hover{
+    background:white;
+    color:#111;
+}
+
+/* FLOATING */
+.float-box{
+    position:absolute;
+    right:8%;
+    bottom:12%;
+    background:white;
+    color:#111;
+    padding:25px;
+    border-radius:22px;
+    max-width:320px;
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+    animation:float 3s ease-in-out infinite;
+}
+
+.float-box i{
+    color:var(--rojo);
+    font-size:38px;
+}
+
+/* SECTIONS */
+section{
+    padding:90px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.section-title h2{
+    font-weight:900;
+    font-size:clamp(32px,4vw,46px);
+    color:var(--negro);
+}
+
+.section-title p{
+    color:#666;
+    max-width:720px;
+    margin:15px auto 0;
+}
+
+/* CARDS */
+.service-card{
+    background:white;
+    padding:35px 28px;
+    border-radius:24px;
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+    height:100%;
+    transition:.35s;
+    border:1px solid #eee;
+    position:relative;
+    overflow:hidden;
+}
+
+.service-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:5px;
+    background:var(--rojo);
+}
+
+.service-card:hover{
+    transform:translateY(-12px);
+    box-shadow:0 18px 45px rgba(227,6,19,.18);
+}
+
+.service-card i{
+    font-size:46px;
+    color:var(--rojo);
+    margin-bottom:20px;
+}
+
+.service-card h4{
+    font-weight:800;
+    margin-bottom:15px;
+}
+
+/* PRODUCTS */
+.products{
+    background:var(--gris);
+}
+
+.product-card{
+    background:white;
+    border-radius:25px;
+    padding:30px;
+    height:100%;
+    text-align:center;
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.product-card:hover{
+    transform:scale(1.04);
+}
+
+.ext-icon{
+    width:92px;
+    height:130px;
+    background:linear-gradient(180deg,#ff2b2b,#b50000);
+    border-radius:18px 18px 12px 12px;
+    margin:0 auto 22px;
+    position:relative;
+    box-shadow:inset 0 -15px 20px rgba(0,0,0,.2);
+}
+
+.ext-icon::before{
+    content:"";
+    position:absolute;
+    top:-28px;
+    left:28px;
+    width:36px;
+    height:28px;
+    background:#222;
+    border-radius:8px 8px 0 0;
+}
+
+.ext-icon::after{
+    content:"ABC";
+    position:absolute;
+    top:48px;
+    left:50%;
+    transform:translateX(-50%);
+    background:white;
+    color:#111;
+    font-weight:900;
+    padding:6px 10px;
+    border-radius:6px;
+}
+
+/* WHY */
+.why{
+    background:#111;
+    color:white;
+}
+
+.why .section-title h2{
+    color:white;
+}
+
+.why-box{
+    display:flex;
+    gap:18px;
+    margin-bottom:28px;
+}
+
+.why-box i{
+    color:var(--amarillo);
+    font-size:32px;
+    flex-shrink:0;
+}
+
+.why-box h5{
+    font-weight:800;
+}
+
+/* PROCESS */
+.step{
+    text-align:center;
+    padding:25px;
+}
+
+.step-number{
+    width:70px;
+    height:70px;
+    background:var(--rojo);
+    color:white;
+    font-size:28px;
+    font-weight:900;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 20px;
+    box-shadow:0 12px 25px rgba(227,6,19,.35);
+}
+
+/* COVERAGE */
+.coverage{
+    background:
+    linear-gradient(rgba(227,6,19,.9),rgba(130,0,8,.9)),
+    url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1600&q=80');
+    background-size:cover;
+    background-position:center;
+    color:white;
+    text-align:center;
+}
+
+.city-pill{
+    display:inline-block;
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.3);
+    padding:12px 22px;
+    border-radius:50px;
+    margin:7px;
+    font-weight:700;
+}
+
+/* FORM */
+.contact{
+    background:#f7f7f7;
+}
+
+.form-box{
+    background:white;
+    padding:40px;
+    border-radius:28px;
+    box-shadow:0 15px 45px rgba(0,0,0,.1);
+}
+
+.form-control,
+.form-select{
+    padding:15px;
+    border-radius:14px;
+    border:1px solid #ddd;
+}
+
+.form-control:focus,
+.form-select:focus{
+    border-color:var(--rojo);
+    box-shadow:0 0 0 .2rem rgba(227,6,19,.15);
+}
+
+/* CTA */
+.cta{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:70px 20px;
+}
+
+.cta h2{
+    font-weight:900;
+    font-size:clamp(30px,4vw,48px);
+}
+
+/* FOOTER */
+footer{
+    background:#050505;
+    color:white;
+    padding:40px 0;
+}
+
+.footer-logo{
+    font-size:28px;
+    font-weight:900;
+}
+
+.footer-logo span{
+    color:var(--rojo);
+}
+
+/* WHATSAPP */
+.whatsapp-float{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    width:65px;
+    height:65px;
+    background:#25d366;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+    text-decoration:none;
+    z-index:999;
+    box-shadow:0 12px 30px rgba(37,211,102,.45);
+    animation:bounce 2.2s infinite;
+}
+
+.whatsapp-float:hover{
+    color:white;
+    transform:scale(1.08);
+}
+
+/* ANIMATIONS */
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-15px)}
+}
+
+@keyframes pulse{
+    from{transform:scale(1)}
+    to{transform:scale(1.25)}
+}
+
+@keyframes bounce{
+    0%,20%,50%,80%,100%{transform:translateY(0)}
+    40%{transform:translateY(-10px)}
+    60%{transform:translateY(-5px)}
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .hero{
+        text-align:center;
+        padding-top:90px;
+    }
+
+    .float-box{
+        position:relative;
+        right:auto;
+        bottom:auto;
+        margin:35px auto 0;
+    }
+
+    .btn-secondary-custom{
+        margin-left:0;
+        margin-top:15px;
+        display:inline-flex;
+    }
+
+    section{
+        padding:65px 0;
+    }
+
+    .form-box{
+        padding:28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Extin<span>Col</span></a>
+
+        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+                <li class="nav-item"><a class="nav-link" href="#productos">Extintores</a></li>
+                <li class="nav-item"><a class="nav-link" href="#cobertura">Cobertura</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contacto">Cotizar</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="hero" id="inicio">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 hero-content">
+                <div class="badge-custom">
+                    <i class="bi bi-shield-check"></i> Seguridad contra incendios en Colombia
+                </div>
+
+                <h1>Venta, recarga y mantenimiento de <span>extintores</span></h1>
+
+                <p>
+                    En ExtinCol protegemos empresas, locales, hogares, vehículos, bodegas y conjuntos residenciales
+                    con soluciones certificadas en prevención y control de incendios.
+                </p>
+
+                <div class="mt-4">
+                    <a class="btn-main" href="https://wa.me/573005360298?text=Hola%20ExtinCol,%20quiero%20cotizar%20venta%20o%20recarga%20de%20extintores" target="_blank">
+                        <i class="bi bi-whatsapp"></i> Cotizar por WhatsApp
+                    </a>
+
+                    <a class="btn-secondary-custom" href="#servicios">
+                        Ver servicios
+                    </a>
+                </div>
+            </div>
+
+            <div class="float-box">
+                <i class="bi bi-fire"></i>
+                <h5 class="fw-bold mt-3">Atención rápida</h5>
+                <p class="mb-0">
+                    Recarga, inspección, venta y señalización para negocios, hogares y empresas.
+                </p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="servicios">
+    <div class="container">
+        <div class="section-title reveal">
+            <h2>Servicios especializados</h2>
+            <p>
+                Cubrimos todo el proceso: venta, recarga, mantenimiento, inspección, señalización y asesoría para cumplimiento normativo.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4 reveal">
+                <div class="service-card">
+                    <i class="bi bi-bag-check"></i>
+                    <h4>Venta de extintores</h4>
+                    <p>Extintores nuevos para hogares, vehículos, locales comerciales, oficinas, bodegas, restaurantes e industrias.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 reveal">
+                <div class="service-card">
+                    <i class="bi bi-arrow-repeat"></i>
+                    <h4>Recarga de extintores</h4>
+                    <p>Recargamos extintores multipropósito, CO₂, solkaflam, agua a presión y otros agentes según necesidad.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 reveal">
+                <div class="service-card">
+                    <i class="bi bi-tools"></i>
+                    <h4>Mantenimiento preventivo</h4>
+                    <p>Revisión de presión, manguera, válvula, boquilla, cilindro, manómetro, sello y estado general del equipo.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 reveal">
+                <div class="service-card">
+                    <i class="bi bi-clipboard2-check"></i>
+                    <h4>Inspección técnica</h4>
+                    <p>Verificación del estado, ubicación, accesibilidad y vigencia de los extintores instalados.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 reveal">
+                <div class="service-card">
+                    <i class="bi bi-signpost-split"></i>
+                    <h4>Señalización de seguridad</h4>
+                    <p>Instalación de avisos, rutas de evacuación, puntos de extintor y elementos de emergencia.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 reveal">
+                <div class="service-card">
+                    <i class="bi bi-building-check"></i>
+                    <h4>Soluciones empresariales</h4>
+                    <p>Planes para empresas, conjuntos, colegios, edificios, comercios, talleres y establecimientos públicos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="products" id="productos">
+    <div class="container">
+        <div class="section-title reveal">
+            <h2>Tipos de extintores</h2>
+            <p>
+                Te asesoramos para elegir el extintor correcto según el riesgo, el espacio y el tipo de material combustible.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3 reveal">
+                <div class="product-card">
+                    <div class="ext-icon"></div>
+                    <h5 class="fw-bold">Multipropósito ABC</h5>
+                    <p>Ideal para hogares, oficinas, locales, vehículos y comercios.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 reveal">
+                <div class="product-card">
+                    <div class="ext-icon"></div>
+                    <h5 class="fw-bold">CO₂</h5>
+                    <p>Recomendado para equipos eléctricos, servidores y zonas técnicas.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 reveal">
+                <div class="product-card">
+                    <div class="ext-icon"></div>
+                    <h5 class="fw-bold">Solkaflam</h5>
+                    <p>Para espacios donde se requiere protección limpia y sin residuos.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 reveal">
+                <div class="product-card">
+                    <div class="ext-icon"></div>
+                    <h5 class="fw-bold">Agua a presión</h5>
+                    <p>Uso específico para riesgos clase A, madera, papel y materiales sólidos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="why">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 reveal">
+                <div class="section-title text-start">
+                    <h2>¿Por qué elegir ExtinCol?</h2>
+                    <p>
+                        Trabajamos con atención responsable, equipos adecuados y orientación clara para proteger tus espacios.
+                    </p>
+                </div>
+
+                <div class="why-box">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <div>
+                        <h5>Atención para empresas y hogares</h5>
+                        <p>Soluciones para negocios pequeños, empresas grandes, viviendas, vehículos y comunidades.</p>
+                    </div>
+                </div>
+
+                <div class="why-box">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <div>
+                        <h5>Asesoría personalizada</h5>
+                        <p>Te indicamos qué extintor necesitas según el riesgo y el tipo de espacio.</p>
+                    </div>
+                </div>
+
+                <div class="why-box">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <div>
+                        <h5>Respuesta rápida por WhatsApp</h5>
+                        <p>Recibe información, cotización y orientación directamente desde tu celular.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 reveal">
+                <div class="p-4 bg-white text-dark rounded-5 shadow">
+                    <h3 class="fw-black mb-4">Sectores que atendemos</h3>
+
+                    <div class="row g-3">
+                        <div class="col-6"><i class="bi bi-shop text-danger"></i> Locales</div>
+                        <div class="col-6"><i class="bi bi-house-door text-danger"></i> Hogares</div>
+                        <div class="col-6"><i class="bi bi-truck text-danger"></i> Vehículos</div>
+                        <div class="col-6"><i class="bi bi-building text-danger"></i> Empresas</div>
+                        <div class="col-6"><i class="bi bi-box-seam text-danger"></i> Bodegas</div>
+                        <div class="col-6"><i class="bi bi-cup-hot text-danger"></i> Restaurantes</div>
+                        <div class="col-6"><i class="bi bi-hospital text-danger"></i> Clínicas</div>
+                        <div class="col-6"><i class="bi bi-mortarboard text-danger"></i> Colegios</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="section-title reveal">
+            <h2>Proceso de atención</h2>
+            <p>Solicitar tu servicio es rápido, claro y directo.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-3 reveal">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h5 class="fw-bold">Nos escribes</h5>
+                    <p>Comunícate por WhatsApp y cuéntanos qué necesitas.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 reveal">
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h5 class="fw-bold">Te asesoramos</h5>
+                    <p>Validamos tipo de extintor, cantidad, ubicación y servicio requerido.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 reveal">
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h5 class="fw-bold">Cotizamos</h5>
+                    <p>Recibes una propuesta clara según venta, recarga o mantenimiento.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 reveal">
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h5 class="fw-bold">Atendemos</h5>
+                    <p>Coordinamos el servicio según tu ciudad y disponibilidad.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="coverage" id="cobertura">
+    <div class="container reveal">
+        <h2 class="fw-bold display-5">Cobertura en Colombia</h2>
+        <p class="lead mt-3">
+            Atendemos solicitudes en principales ciudades, municipios y zonas comerciales del país.
+        </p>
+
+        <div class="mt-4">
+            <span class="city-pill">Bogotá</span>
+            <span class="city-pill">Medellín</span>
+            <span class="city-pill">Cali</span>
+            <span class="city-pill">Bucaramanga</span>
+            <span class="city-pill">Barranquilla</span>
+            <span class="city-pill">Cartagena</span>
+            <span class="city-pill">Cúcuta</span>
+            <span class="city-pill">Pereira</span>
+            <span class="city-pill">Manizales</span>
+            <span class="city-pill">Villavicencio</span>
+        </div>
+    </div>
+</section>
+
+<section class="contact" id="contacto">
+    <div class="container">
+        <div class="section-title reveal">
+            <h2>Solicita tu cotización</h2>
+            <p>
+                Completa los datos y te llevamos directamente a WhatsApp con tu solicitud lista.
+            </p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8 reveal">
+                <div class="form-box">
+                    <form id="quoteForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Nombre</label>
+                                <input type="text" id="nombre" class="form-control" placeholder="Tu nombre" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Ciudad</label>
+                                <input type="text" id="ciudad" class="form-control" placeholder="Ej: Bucaramanga" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Servicio requerido</label>
+                                <select id="servicio" class="form-select" required>
+                                    <option value="">Seleccionar</option>
+                                    <option>Venta de extintores</option>
+                                    <option>Recarga de extintores</option>
+                                    <option>Mantenimiento</option>
+                                    <option>Inspección técnica</option>
+                                    <option>Señalización</option>
+                                    <option>Servicio empresarial</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Cantidad aproximada</label>
+                                <input type="number" id="cantidad" class="form-control" placeholder="Ej: 3" required>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">Mensaje adicional</label>
+                                <textarea id="mensaje" class="form-control" rows="4" placeholder="Cuéntanos qué necesitas"></textarea>
+                            </div>
+
+                            <div class="col-12 text-center mt-4">
+                                <button type="submit" class="btn-main border-0">
+                                    <i class="bi bi-whatsapp"></i> Enviar solicitud por WhatsApp
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="container reveal">
+        <h2>Protege tu negocio, tu hogar y tu equipo de trabajo</h2>
+        <p class="lead mt-3">
+            Escríbenos ahora y recibe asesoría para venta, recarga o mantenimiento de extintores.
+        </p>
+
+        <a class="btn-main mt-4" href="https://wa.me/573005360298?text=Hola%20ExtinCol,%20necesito%20asesoría%20sobre%20extintores" target="_blank">
+            <i class="bi bi-whatsapp"></i> Hablar con ExtinCol
+        </a>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-md-6">
+                <div class="footer-logo">Extin<span>Col</span></div>
+                <p class="mt-2 mb-0">
+                    Venta, recarga, mantenimiento e inspección de extintores en Colombia.
+                </p>
+            </div>
+
+            <div class="col-md-6 text-md-end">
+                <p class="mb-1"><i class="bi bi-whatsapp text-success"></i> WhatsApp: 300 536 0298</p>
+                <p class="mb-0">© 2026 ExtinCol. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/573005360298?text=Hola%20ExtinCol,%20quiero%20más%20información" target="_blank">
+    <i class="bi bi-whatsapp"></i>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+
+function revealOnScroll(){
+    reveals.forEach(el=>{
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        const visiblePoint = 120;
+
+        if(elementTop < windowHeight - visiblePoint){
+            el.classList.add('active');
+        }
+    });
+}
+
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
+
+document.getElementById('quoteForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const nombre = document.getElementById('nombre').value.trim();
+    const ciudad = document.getElementById('ciudad').value.trim();
+    const servicio = document.getElementById('servicio').value;
+    const cantidad = document.getElementById('cantidad').value.trim();
+    const mensaje = document.getElementById('mensaje').value.trim();
+
+    const texto = `Hola ExtinCol, quiero solicitar una cotización.%0A%0A` +
+    `Nombre: ${nombre}%0A` +
+    `Ciudad: ${ciudad}%0A` +
+    `Servicio: ${servicio}%0A` +
+    `Cantidad aproximada: ${cantidad}%0A` +
+    `Mensaje: ${mensaje}`;
+
+    window.open(`https://wa.me/573005360298?text=${texto}`, '_blank');
+});
+</script>
+
+</body>
+</html>
